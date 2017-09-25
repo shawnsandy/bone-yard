@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\Factory;
 
 
 
+
 /**
-Class Provider
+lass Provider
  * @package :namespace
  */
 class :providerThemesProvider extends ServiceProvider
@@ -19,13 +20,15 @@ class :providerThemesProvider extends ServiceProvider
 
 
 
+
 	/**
 	* Perform post-registration booting of services.
-				     *
-				     * @return void
-				     */
-				    public function boot()
-				    {
+					     *
+					     * @return void
+					     */
+					    public function boot()
+					    {
+
 
 
 
@@ -34,13 +37,14 @@ class :providerThemesProvider extends ServiceProvider
 
 		/**
 		* Package views
-								         */
-								        $this->loadViewsFrom(__DIR__ . '/resources/views', ':package_name');
+										         */
+										        $this->loadViewsFrom(__DIR__ . '/resources/views', ':package_name');
 		$this->publishes(
-								            [
-								                __DIR__ . '/resources/views' => resource_path('views/vendor/:package_name'),
-								            ], ':package_name-views'
-								        );
+										            [
+										                __DIR__ . '/resources/views' => resource_path('views/vendor/:package_name'),
+										            ], ':package_name-views'
+										        );
+
 
 
 
@@ -48,14 +52,15 @@ class :providerThemesProvider extends ServiceProvider
 
 		/**
 		* Package assets
-								         */
-								        $this->publishes(
-								            [
-								                __DIR__.'/resources/assets/js/' => public_path('assets/:package_name/js/'),
-								                __DIR__.'/public/assets/' => public_path('assets/')
-								            ], ':package_name-assets'
-								        );
+										         */
+										        $this->publishes(
+										            [
+										                __DIR__.'/resources/assets/js/' => public_path('assets/:package_name/js/'),
+										                __DIR__.'/public/assets/' => public_path('assets/')
+										            ], ':package_name-assets'
+										        );
 		);
+
 
 
 
@@ -63,12 +68,13 @@ class :providerThemesProvider extends ServiceProvider
 
 		/**
 		* Package resources to resources
-								         */
-								        $this->publishes(
-								            [
-								                __DIR__.'/resources/assets/' => resource_path('assets/:package_name/'),
-								            ], ':package_name-resources'
-								        );
+										         */
+										        $this->publishes(
+										            [
+										                __DIR__.'/resources/assets/' => resource_path('assets/:package_name/'),
+										            ], ':package_name-resources'
+										        );
+
 
 
 
@@ -76,20 +82,20 @@ class :providerThemesProvider extends ServiceProvider
 
 		/**
 		* Package config
-								         */
-								        $this->publishes(
-								            [__DIR__ . '/config/config.php' => config_path(':package_name.php')],
-								            ':package_name-config'
-								        );
+										         */
+										        $this->publishes(
+										            [__DIR__ . '/config/config.php' => config_path(':package_name.php')],
+										            ':package_name-config'
+										        );
 
 		$this->publishes([
-										            __DIR__ . '/migrations/' => database_path('migrations')
-										        ], ':package_name-migrations');
+												            __DIR__ . '/migrations/' => database_path('migrations')
+												        ], ':package_name-migrations');
 
 
 		$this->loadMigrationsFrom(__DIR__ . '/migrations');
 		$this->app->bind(
-						        ':provider', function () {
+								        ':provider', function () {
 			return new :provider();
 		}
 		);
@@ -97,8 +103,8 @@ class :providerThemesProvider extends ServiceProvider
 		$this->registerFactoriesPath(__DIR__.'/factories');
 
 		$views = resource_path(
-				            "views/themes/:package_name"
-				        );
+						            "views/themes/:package_name"
+						        );
 
 		$this->loadViewsFrom($views, ':package_name');
 
@@ -110,23 +116,24 @@ class :providerThemesProvider extends ServiceProvider
 
 
 
+
 	/**
 	* Register factories.
-			    *
-			    * @param  string  $path
-			    * @return void
-			    */
-			    protected function registerFactoriesPath($path)
-			    {
+				    *
+				    * @param  string  $path
+				    * @return void
+				    */
+				    protected function registerFactoriesPath($path)
+				    {
 		$this->app->make(Factory::class)->load($path);
 	}
 
 
 	public function loadProviders()
-			        {
+				        {
 
 		if (!$this->app->runningInConsole()) :
-								            include_once __DIR__ . '/Helpers/helper.php';
+										            include_once __DIR__ . '/Helpers/helper.php';
 		endif;
 
 
@@ -136,26 +143,24 @@ class :providerThemesProvider extends ServiceProvider
 
 
 
+
 	/**
 	* Register any package services.
-				     *
-				     * @return void
-				     */
-				    public function register()
-				    {
+					     *
+					     * @return void
+					     */
+					    public function register()
+					    {
 
 		$this->mergeConfigFrom(
-								            __DIR__ . '/config/config.php', ':package_name'
-								        );
+										            __DIR__ . '/config/config.php', ':package_name'
+										        );
 
 		$this->app->bind(
-								        ':provider', function () {
+										        ':provider', function () {
 			return new :provider();
 		}
 		);
 	}
-
-
-
 
 }

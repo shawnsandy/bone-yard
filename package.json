@@ -14,7 +14,8 @@
         "setup": "npm run fonts && npm run animatecss && npm run font-awesome && npm run copy:aos",
         "watch:css": "onchange 'src/resources/assets/**/*.scss' -- npm run scss",
         "images": "imagemin images/bg/* --out-dir=src/public/img/bg -p",
-        "gulp": "gulp copy:fonts"
+        "gulp": "gulp copy:fonts",
+
     },
     "repository": {
         "type": "git",
@@ -58,6 +59,7 @@
         "node-notifier": "^4.6.1",
         "node-sass": "^3.10.1",
         "toastr": "^2.1.2",
-        "underscore": "^1.8.3"
+        "underscore": "^1.8.3",
+        "gulp-git": "^2.4.2"
     }
 }
