@@ -1,0 +1,56 @@
+html {
+    font-size: 62px;
+    font-size: 62.5%;
+    color: #4a4a4a;
+    -webkit-font-smoothing: antialiased;
+    height: 100%;
+}
+
+body {
+    font-size: 15px;
+    font-size: 1.5rem;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    transition: all 0.3s ease;
+}
+
+*,
+label {
+    @include font-size(1.6);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 500;
+
+}
+
+p {
+    @include font-size(1.6);
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+.im {
+    &.default {
+        @include font-size(1.4);
+        padding: 0 7px;
+        color: $grey;
+    }
+    &.im-small {
+        font-size: 12px;
+    }
+}
+
+article {
+    p {
+        @include font-size(1.7);
+        line-height: 1.8;
+    }
+}

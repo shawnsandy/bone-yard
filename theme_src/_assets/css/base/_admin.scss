@@ -1,0 +1,121 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: $dashboard_bg; // overflow: hidden;
+}
+
+.admin {
+    >.columns {
+        margin: 0;
+        padding: 0;
+    }
+    .navbar {
+        height: 80px;
+        &.is-transparent {
+            background-color: rgba(255, 255, 255, 0.5);
+            background-image: none;
+        }
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+    }
+    .main {
+        padding: 0 0px;
+        margin-left: 240px;
+        .navbar {
+            padding: 0 20px;
+        }
+    }
+    .dashboard-name {
+        color: $grey;
+    }
+    // .sidebar-text {
+    //     // transition: all 0.2s ease;
+    // }
+    .im {
+        @include font-size(2.4);
+    }
+    .dashboard {
+        padding: 0 20px;
+        background-color: #F5F8F9;
+        &.hidden {
+            display: none;
+        }
+        &.close {
+            .sidebar {
+                width: 80px !important;
+            }
+            .sidebar-text {
+                display: none;
+                transition: all 0.5s ease;
+            }
+            .main {
+                margin-left: 80px;
+                transition: all 0.9s ease;
+            }
+        }
+        .title,
+        .subtitle {
+            color: $grey;
+        }
+        .cards {
+            .im {
+                font-size: 21px;
+            }
+        }
+    }
+    .sidebar {
+        transition: all 0.3s ease;
+        .navbar {
+            a:hover {
+                background-color: transparent;
+                color: #A0CF67;
+            }
+            background-color: darken($sidebar_background, 25%);
+            >* {
+                @include flex-center();
+            }
+        }
+        width: 240px;
+        background-color: darken($sidebar_background, 10%);
+        @include gradient(darken($sidebar_background, 5%), darken($sidebar_background, 50%));
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+        transition: all 0.3s ease;
+        position: fixed;
+        bottom: 0;
+        .column {
+            border: none !important;
+        }
+        a {
+            color: #fff;
+            &:hover,
+            &:focus {
+                color: lightgray;
+            }
+            width: 100%;
+            height: 100%;
+            padding-left: 14px;
+            font-size: 14px;
+        }
+        .im,
+        .fa {
+            margin: 0 12px;
+            @include font-size(2.1);
+        }
+        .menu-list {
+            a {
+                @include flex-center();
+                justify-content: flex-start;
+                height: 65px;
+                color: lightgray;
+                text-shadow: rgba(0, 0, 0, 0.99) 1px 2px 4px;
+                &:hover {
+                    background-color: darken($dark, 15%);
+                    color: whitesmoke;
+                }
+            }
+        }
+    }
+}
