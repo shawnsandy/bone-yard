@@ -15,6 +15,8 @@ var toast = require("node-notifier");
 var git = require("gulp-git");
 var replace = require("gulp-ext-replace");
 var print = require("gulp-print");
+var replace_txt = require("gulp-replace");
+var config = require("./config.js");
 
 gulp.task("sass", function() {
   return gulp
@@ -59,19 +61,19 @@ gulp.task("clone:html", function() {
 
 gulp.task(
   "imports",
-  ["import:views", "import::partials", "import::assets"],
+  ["import:views", "import:partials", "import:assets"],
   function() {}
 );
 
 /**
  * imports views and converts them to blade.php files
+ *
  */
 
 gulp.task("import:views", function() {
   return gulp
     .src("./html/theme/views/**/*.html", { base: "./html/theme/views" })
     .pipe(replace(".blade.php", ".html"))
-    .pipe(changed("./src/imports/views"))
     .pipe(gulp.dest("./src/imports/views"))
     .pipe(print());
 });
@@ -87,7 +89,7 @@ gulp.task("import:partials", function() {
       base: "./html/theme/views"
     })
     .pipe(replace(".blade.php", ".html"))
-    .pipe(changed("./src/resources/views"))
+    .pipe(replace_txt("stylesheets", "/" + config.theme_folder + "/css"))
     .pipe(gulp.dest("./src/resources/views"))
     .pipe(print());
 });
@@ -97,8 +99,9 @@ gulp.task("import:partials", function() {
  */
 gulp.task("import:assets", function() {
   return gulp
-    .src("./html/theme/public/**/*.*", { base: "./html/public" })
-    .pipe(changed("./src/public"))
+    .src(["./html/theme/public/**/*.css", "./html/theme/public/**/*.js"], {
+      base: "./html/theme/public"
+    })
     .pipe(gulp.dest("./src/public"))
     .pipe(print());
 });
