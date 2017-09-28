@@ -1,3 +1,3 @@
 module.exports = {
-  theme_folder: "orangebox"
+  theme_folder: ":package_name"
 };

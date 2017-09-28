@@ -44,9 +44,7 @@
         "imagemin-cli": "^3.0.0",
         "laravel-elixir-vueify": "^2.0.0",
         "onchange": "^3.0.0",
-        "postcss-cli": "^2.5.2"
-    },
-    "dependencies": {
+        "postcss-cli": "^2.5.2",
         "bourbon": "^4.2.7",
         "bulma": "^0.5.3",
         "grunticon-lib": "^1.2.1",
@@ -63,5 +61,6 @@
         "node-sass": "^3.10.1",
         "toastr": "^2.1.2",
         "underscore": "^1.8.3"
-    }
+    },
+    "dependencies": {}
 }

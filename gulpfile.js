@@ -74,6 +74,7 @@ gulp.task("import:views", function() {
   return gulp
     .src("./html/theme/views/**/*.html", { base: "./html/theme/views" })
     .pipe(replace(".blade.php", ".html"))
+    .pipe(replace_txt("stylesheets", "/" + config.theme_folder + "/css"))
     .pipe(gulp.dest("./src/imports/views"))
     .pipe(print());
 });
