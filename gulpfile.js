@@ -16,30 +16,40 @@ var git = require("gulp-git");
 var replace = require("gulp-ext-replace");
 var print = require("gulp-print");
 var replace_txt = require("gulp-replace");
+var cssnano = require("gulp-cssnano");
 var config = require("./config.js");
+var reports = require("gulp-sizereport");
 
+/**
+ * process files sass
+ * */
 gulp.task("sass", function() {
   return gulp
-    .src("./src/resources/assets/**/*.scss", {
-      base: "./src/resources/assets/"
-    })
-    .pipe(changed("./src/resources/assets/**/*.scss"))
-    .pipe(sass().on("error", notify.onError("Error: <%= error.message %>")))
-    .pipe(gulp.dest("./src/resources/assets"))
+    .src("./src/scss/**/*.scss", { base: "./src/scss/" })
+    .pipe(changed("./src/scss/**/*.scss"))
+    .pipe(sass().on("error", sass.logError))
+    .pipe(cssnano())
+    .pipe(gulp.dest("./src/public/css"))
+    .pipe(
+      reports({
+        gzip: true
+      })
+    )
     .pipe(
       notify({
-        title: "Pages Notification",
+        title: "Task Completed",
         message: "SCSS files compiled, enjoy",
         onLast: true
       })
     );
 });
 
-gulp.task("package", function() {
-  return gulp
-    .src("./src/resources/assets/**/*.*", { base: "./src/resources/assets/" })
-    .pipe(changed("./src/resources/assets/**/*.*"))
-    .pipe(gulp.dest("../../resources/assets/:package_name"));
+/**
+ * watch sass files
+ * run sass task on change
+ */
+gulp.task("sass:watch", function() {
+  gulp.watch("./src/scss", ["sass"]);
 });
 
 gulp.task("clone:html", function() {
@@ -59,6 +69,9 @@ gulp.task("clone:html", function() {
   );
 });
 
+/**
+ * run import task
+ */
 gulp.task(
   "imports",
   ["import:views", "import:partials", "import:assets"],
@@ -75,6 +88,7 @@ gulp.task("import:views", function() {
     .src("./html/theme/views/**/*.html", { base: "./html/theme/views" })
     .pipe(replace(".blade.php", ".html"))
     .pipe(replace_txt("stylesheets", "/" + config.theme_folder + "/css"))
+    .pipe(replace_txt("javascripts", "/" + config.theme_folder + "/js"))
     .pipe(gulp.dest("./src/imports/views"))
     .pipe(print());
 });
@@ -91,6 +105,7 @@ gulp.task("import:partials", function() {
     })
     .pipe(replace(".blade.php", ".html"))
     .pipe(replace_txt("stylesheets", "/" + config.theme_folder + "/css"))
+    .pipe(replace_txt("javascripts", "/" + config.theme_folder + "/js"))
     .pipe(gulp.dest("./src/resources/views"))
     .pipe(print());
 });
@@ -100,11 +115,23 @@ gulp.task("import:partials", function() {
  */
 gulp.task("import:assets", function() {
   return gulp
-    .src(["./html/theme/public/**/*.css", "./html/theme/public/**/*.js"], {
-      base: "./html/theme/public"
-    })
+    .src(
+      ["./html/theme/public/css/**/*.css", "./html/theme/public/js/**/*.js"],
+      {
+        base: "./html/theme/public"
+      }
+    )
     .pipe(gulp.dest("./src/public"))
     .pipe(print());
 });
 
-gulp.task("default", ["package"], function() {});
+gulp.task("import:sass", function() {
+  return gulp
+    .src(["./html/src/stylesheets/**/*.scss"], {
+      base: "./html/src/stylesheets"
+    })
+    .pipe(gulp.dest("./src/scss"))
+    .pipe(print());
+});
+
+gulp.task("default", ["imports"], function() {});

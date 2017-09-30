@@ -38,6 +38,7 @@
         "aos": "^2.0.4",
         "autoprefixer": "^6.4.0",
         "bootstrap-sass": "^3.3.7",
+        "bulma": "^0.5.3",
         "font-awesome": "^4.6.3",
         "gulp": "^3.9.1",
         "imagemin": "^5.2.2",
@@ -60,6 +61,8 @@
         "node-notifier": "^4.6.1",
         "node-sass": "^3.10.1",
         "toastr": "^2.1.2",
+        "gulp-cssnano": "^2.1.2",
+        "gulp-sizereport": "^1.2.0",
         "underscore": "^1.8.3"
     },
     "dependencies": {}
