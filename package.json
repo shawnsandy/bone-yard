@@ -63,5 +63,8 @@
         "gulp-cssnano": "^2.1.2",
         "gulp-sizereport": "^1.2.0"
     },
-    "dependencies": {}
+    "dependencies": {
+    "smooth-scroll": "^12.1.5",
+        "validate": "cferdinandi/validate"
+    }
 }
