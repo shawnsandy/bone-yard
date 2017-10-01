@@ -125,7 +125,8 @@ class :providerThemesProvider extends ServiceProvider
 		        'author' => "your name",
 		        'email' => "your email",
 		        'website' => "your website",
-		        "options" => []
+                "options" => [],
+                "fields" => []
 
 		] ]);
 
