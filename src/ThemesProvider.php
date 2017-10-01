@@ -122,9 +122,9 @@ class :providerThemesProvider extends ServiceProvider
 		config(
             ["jarvis.:package-name" => [
 
-		        'author' => "your name",
-		        'email' => "your email",
-		        'website' => "your website",
+		        'author' => ":author_name",
+		        'email' => ":author_email",
+		        'website' => ":author_website",
                 "options" => [],
                 "fields" => []
 
